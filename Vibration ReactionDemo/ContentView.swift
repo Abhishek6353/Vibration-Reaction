@@ -8,17 +8,27 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var start = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 24) {
+            Text("Vibration Reaction")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+
+            Text("Test your reaction time using vibration only. Tap when vibration stops.")
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+
+            Button("Start Test") {
+                start = true
+            }
+            .buttonStyle(.borderedProminent)
         }
         .padding()
+        .fullScreenCover(isPresented: $start) {
+            ReactionTestView()
+        }
     }
 }
 
-#Preview {
-    ContentView()
-}
